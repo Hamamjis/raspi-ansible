@@ -1,0 +1,14 @@
+- name: Create linux users
+  hosts: raspi
+  become: true
+
+  vars_files:
+    - ../vars.yml
+
+  tasks:
+    - name: Create linux users
+      ansible.builtin.user:
+        name: "{{ item.name }}"
+        password: "{{ item.password | password_hash }}"
+        update_password: on_create
+      loop: "{{ users }}"

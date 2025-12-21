@@ -1,1 +1,2 @@
 - ansible.builtin.import_playbook: playbooks/create_users.yml
+- ansible.builtin.import_playbook: playbooks/cockpit.yml

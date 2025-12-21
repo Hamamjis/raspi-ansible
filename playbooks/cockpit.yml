@@ -1,0 +1,6 @@
+- name: Manage cockpit
+  hosts: raspi
+  become: true
+
+  roles:
+    - linux-system-roles.cockpit

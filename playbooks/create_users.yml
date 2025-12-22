@@ -6,9 +6,26 @@
     - ../vars.yml
 
   tasks:
+    - name: Validate usernames
+      ansible.builtin.assert:
+        that: item.name is match("^[a-zA-Z0-9_]+$")
+        msg: "Invalid username: {{ item.name }}"
+      loop: "{{ users }}"
+
+    - name: Prevent "shared" username
+      ansible.builtin.assert:
+        that: item.name != "shared"
+        msg: 'The username "shared" is not allowed.'
+      loop: "{{ users }}"
+
+    - name: Create "users" group
+      ansible.builtin.group:
+        name: users
+
     - name: Create linux users
       ansible.builtin.user:
         name: "{{ item.name }}"
         password: "{{ item.password | password_hash }}"
         update_password: on_create
+        groups: users
       loop: "{{ users }}"

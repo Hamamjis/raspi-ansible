@@ -1,0 +1,19 @@
+- name: Setup OpenSpeedTest
+  hosts: raspi
+
+  vars:
+    docker_root: /home/{{ ansible_user }}/docker
+    openspeedtest_dir: "{{ docker_root }}/openspeedtest"
+
+  tasks:
+    - name: Copy OpenSpeedTest directory
+      ansible.builtin.copy:
+        src: "./files/04_openspeedtest/"
+        dest: "{{ openspeedtest_dir }}"
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: "0755"
+
+    - name: Start OpenSpeedTest
+      community.docker.docker_compose_v2:
+        project_src: "{{ openspeedtest_dir }}"

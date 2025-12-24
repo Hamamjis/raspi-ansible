@@ -19,12 +19,10 @@
 [shared]
   path = {{ samba_shared_folder }}
   browsable = yes
-  writeable = yes
   guest ok = yes
-  valid users = @users
-  force group = users
+  read only = yes
+  write list = @users
   create mask = 0664
-  directory mask = 0664
 
 {% for user in users%}
 

@@ -65,3 +65,14 @@
         name: smbd
         enabled: true
         state: started
+
+    - name: Install wsdd2
+      ansible.builtin.apt:
+        name: wsdd2
+        state: present
+
+    - name: Start and enable wsdd2
+      ansible.builtin.service:
+        name: wsdd2
+        state: started
+        enabled: true

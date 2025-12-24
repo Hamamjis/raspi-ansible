@@ -1,3 +1,3 @@
-- ansible.builtin.import_playbook: create_users.yml
-- ansible.builtin.import_playbook: cockpit.yml
-- ansible.builtin.import_playbook: smb.yml
+- ansible.builtin.import_playbook: 00_linux_users.yml
+- ansible.builtin.import_playbook: 01_cockpit.yml
+- ansible.builtin.import_playbook: 02_smb.yml

@@ -1,7 +1,7 @@
 data_root: /data
 
+default_password: "0000"
+
 users:
   - name: user1
-    password: "password1"
   - name: user2
-    password: "password2"

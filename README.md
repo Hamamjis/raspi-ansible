@@ -24,6 +24,8 @@ The setup the machine, run the following command:
 ansible-playbook playbooks/setup/main.yml
 ```
 
+**Note:** If the users specified in `vars.yaml` don't exist, this will create them with the default password specified.
+
 To change a user's password, run the following command:
 ```sh
 ansible-playbook playbooks/change_password/main.yml

@@ -25,7 +25,7 @@
     - name: Create linux users
       ansible.builtin.user:
         name: "{{ item.name }}"
-        password: "{{ item.password | password_hash }}"
+        password: "{{ default_password | password_hash }}"
         update_password: on_create
         groups: users
         append: true

@@ -8,6 +8,12 @@
   vars:
     samba_shared_folder: "{{ data_root }}/shared"
 
+  handlers:
+    - name: Restart SMB
+      ansible.builtin.service:
+        name: smbd
+        state: restarted
+
   tasks:
     - name: Create data folder
       ansible.builtin.file:
@@ -37,3 +43,25 @@
     - name: Install Samba
       ansible.builtin.apt:
         name: samba
+
+    - name: Copy smb config to /etc/samba/smb.conf
+      ansible.builtin.template:
+        src: smb.conf.j2
+        dest: /etc/samba/smb.conf
+        mode: "644"
+      notify: Restart SMB
+
+    - name: Set Samba password
+      ansible.builtin.shell:
+        "set -o pipefail && printf '%s\n%s\n' '{{ item.password }}' '{{ item.password }}' | smbpasswd -s -a {{ item.name }}"
+      loop: "{{ users }}"
+      loop_control:
+        index_var: user_index
+      when: user_creation.results[user_index].changed
+      notify: Restart SMB
+
+    - name: Start and enable Samba
+      ansible.builtin.service:
+        name: smbd
+        enabled: true
+        state: started

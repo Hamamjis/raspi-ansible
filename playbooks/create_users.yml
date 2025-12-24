@@ -29,4 +29,5 @@
         update_password: on_create
         groups: users
         append: true
+      register: user_creation
       loop: "{{ users }}"

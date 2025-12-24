@@ -28,4 +28,5 @@
         password: "{{ item.password | password_hash }}"
         update_password: on_create
         groups: users
+        append: true
       loop: "{{ users }}"

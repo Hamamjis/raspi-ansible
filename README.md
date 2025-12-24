@@ -20,5 +20,5 @@ sudo dnf install python3-passlib
 ### Usage
 
 ```sh
-ansible-playbook main.yml
+ansible-playbook playbooks/setup/main.yml
 ```

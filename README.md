@@ -19,6 +19,12 @@ sudo dnf install python3-passlib
 
 ### Usage
 
+The setup the machine, run the following command:
 ```sh
 ansible-playbook playbooks/setup/main.yml
+```
+
+To change a user's password, run the following command:
+```sh
+ansible-playbook playbooks/change_password/main.yml
 ```

@@ -3,7 +3,7 @@
   become: true
 
   vars_files:
-    - ../vars.yml
+    - ../../vars.yml
 
   vars:
     samba_shared_folder: "{{ data_root }}/shared"

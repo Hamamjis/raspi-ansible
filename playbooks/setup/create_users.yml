@@ -3,7 +3,7 @@
   become: true
 
   vars_files:
-    - ../vars.yml
+    - ../../vars.yml
 
   tasks:
     - name: Validate usernames

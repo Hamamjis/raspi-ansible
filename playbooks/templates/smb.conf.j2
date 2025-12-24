@@ -1,0 +1,39 @@
+[global]
+  workgroup = WORKGROUP
+  log file = /var/log/samba/log.%m
+  max log size = 1000
+  logging = file
+  panic action = /usr/share/samba/panic-action %d
+  server role = standalone server
+  obey pam restrictions = yes
+  unix password sync = yes
+  passwd program = /usr/bin/passwd %u
+  passwd chat = *Enter\snew\s*\spassword:* %n\n *Retype\snew\s*\spassword:* %n\n *password\supdated\ssuccessfully* .
+  pam password change = yes
+  map to guest = bad user
+  usershare allow guests = yes
+  read raw = yes
+  write raw = yes
+  max protocol = SMB3
+
+[shared]
+  path = {{ samba_shared_folder }}
+  browsable = yes
+  writeable = yes
+  guest ok = yes
+  valid users = @users
+  force group = users
+  create mask = 0664
+  directory mask = 0664
+
+{% for user in users%}
+
+[{{ user.name }}]
+  path = {{ data_root }}/{{ user.name }}
+  browsable = yes
+  writable = yes
+  valid users = {{ user.name }}
+  create mask = 0600
+  directory mask = 0700
+
+{% endfor %}

@@ -1,0 +1,39 @@
+- name: Setup samba
+  hosts: raspi
+  become: true
+
+  vars_files:
+    - ../vars.yml
+
+  vars:
+    samba_shared_folder: "{{ data_root }}/shared"
+
+  tasks:
+    - name: Create data folder
+      ansible.builtin.file:
+        path: "{{ data_root }}"
+        state: directory
+        owner: root
+        group: root
+        mode: "0755"
+
+    - name: Create shared folder
+      ansible.builtin.file:
+        path: "{{ samba_shared_folder }}"
+        state: directory
+        owner: root
+        group: users
+        mode: "2775"
+
+    - name: Create user folders
+      ansible.builtin.file:
+        path: "{{ data_root }}/{{ item.name }}"
+        state: directory
+        owner: "{{ item.name }}"
+        group: "{{ item.name }}"
+        mode: "700"
+      loop: "{{ users }}"
+
+    - name: Install Samba
+      ansible.builtin.apt:
+        name: samba

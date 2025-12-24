@@ -11,6 +11,7 @@
 - Install dependencies:
 ```sh
 ansible-galaxy role install -r requirements.yml
+ansible-galaxy collection install -r requirements.yml
 ```
 - Ensure `passlib` is installed. On Fedora, it can be installed by running the following command:
 ```sh

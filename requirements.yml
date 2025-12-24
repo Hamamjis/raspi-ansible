@@ -1,2 +1,4 @@
 roles:
   - name: linux-system-roles.cockpit
+collections:
+  - name: community.docker

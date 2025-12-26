@@ -2,8 +2,8 @@
   hosts: raspi
   become: true
 
-  vars:
-    docker_root: /home/{{ ansible_user }}/docker
+  vars_files:
+    - ../../vars.yml
 
   tasks:
     - name: Install required system packages

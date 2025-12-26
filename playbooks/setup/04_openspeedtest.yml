@@ -1,8 +1,10 @@
 - name: Setup OpenSpeedTest
   hosts: raspi
 
+  vars_files:
+    - ../../vars.yml
+
   vars:
-    docker_root: /home/{{ ansible_user }}/docker
     openspeedtest_dir: "{{ docker_root }}/openspeedtest"
 
   tasks:

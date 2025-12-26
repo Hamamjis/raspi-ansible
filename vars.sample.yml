@@ -1,4 +1,5 @@
 data_root: /data
+docker_root: /home/{{ ansible_user }}/docker
 
 default_password: "0000"
 

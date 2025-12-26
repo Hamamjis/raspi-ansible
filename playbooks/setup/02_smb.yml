@@ -46,7 +46,7 @@
 
     - name: Copy smb config to /etc/samba/smb.conf
       ansible.builtin.template:
-        src: smb.conf.j2
+        src: 02_smb/smb.conf.j2
         dest: /etc/samba/smb.conf
         mode: "644"
       notify: Restart SMB

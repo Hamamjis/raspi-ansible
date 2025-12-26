@@ -52,8 +52,7 @@
       notify: Restart SMB
 
     - name: Set Samba password
-      ansible.builtin.shell:
-        "set -o pipefail && printf '%s\n%s\n' '{{ default_password }}' '{{ default_password }}' | smbpasswd -s -a {{ item.name }}"
+      ansible.builtin.shell: "set -o pipefail && printf '%s\n%s\n' '{{ default_password }}' '{{ default_password }}' | smbpasswd -s -a {{ item.name }}"
       loop: "{{ users }}"
       loop_control:
         index_var: user_index

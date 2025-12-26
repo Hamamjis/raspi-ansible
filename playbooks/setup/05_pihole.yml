@@ -1,0 +1,27 @@
+- name: Setup Pi-hole
+  hosts: raspi
+
+  vars_files:
+    - ../../vars.yml
+
+  vars:
+    pihole_dir: "{{ docker_root }}/pihole"
+
+  tasks:
+    - name: Copy Pi-hole directory
+      ansible.builtin.copy:
+        src: "./files/05_pihole/"
+        dest: "{{ pihole_dir }}"
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: "0755"
+
+    - name: Copy Pi-hole .env config to pihole_dir/.env
+      ansible.builtin.template:
+        src: .env.j2
+        dest: "{{ pihole_dir }}/.env"
+        mode: "644"
+
+    - name: Start Pi-hole
+      community.docker.docker_compose_v2:
+        project_src: "{{ pihole_dir }}"

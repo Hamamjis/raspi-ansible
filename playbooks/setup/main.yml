@@ -3,3 +3,4 @@
 - ansible.builtin.import_playbook: 02_smb.yml
 - ansible.builtin.import_playbook: 03_docker.yml
 - ansible.builtin.import_playbook: 04_openspeedtest.yml
+- ansible.builtin.import_playbook: 05_pihole.yml

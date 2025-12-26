@@ -1,6 +1,7 @@
 data_root: /data
 docker_root: /home/{{ ansible_user }}/docker
 
+pihole_admin_password: "0000"
 default_password: "0000"
 
 users:

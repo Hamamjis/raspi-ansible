@@ -1,0 +1,13 @@
+- name: Setup Tailscale
+  hosts: raspi
+  become: true
+
+  vars_files:
+    - ../../vars.yml
+
+  roles:
+    - role: artis3n.tailscale.machine
+      vars:
+        verbose: true
+        tailscale_authkey: "{{ tailscale_authkey_secret }}"
+        tailscale_up_skip: false

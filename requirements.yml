@@ -2,3 +2,4 @@ roles:
   - name: linux-system-roles.cockpit
 collections:
   - name: community.docker
+  - name: artis3n.tailscale

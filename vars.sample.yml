@@ -1,5 +1,6 @@
 data_root: /data
 docker_root: /home/{{ ansible_user }}/docker
+tailscale_authkey_secret: "your_tailscale_authkey_secret_here"
 
 pihole_admin_password: "0000"
 default_user_password: "0000"

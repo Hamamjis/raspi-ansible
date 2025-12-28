@@ -1,0 +1,27 @@
+- name: Setup Immich
+  hosts: raspi
+
+  vars_files:
+    - ../../vars.yml
+
+  vars:
+    immich_dir: "{{ docker_root }}/immich"
+
+  tasks:
+    - name: Copy Immich directory
+      ansible.builtin.copy:
+        src: "./files/07_immich/"
+        dest: "{{ immich_dir }}"
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: "0755"
+
+    - name: Copy Immich .env config to immich_dir/.env
+      ansible.builtin.template:
+        src: 07_immich/.env.j2
+        dest: "{{ immich_dir }}/.env"
+        mode: "644"
+
+    - name: Start Immich
+      community.docker.docker_compose_v2:
+        project_src: "{{ immich_dir }}"

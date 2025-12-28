@@ -43,6 +43,9 @@
         groups: docker
         append: true
 
+    - name: Reset ssh connection to apply new group membership
+      ansible.builtin.meta: reset_connection
+
     - name: Create Docker directory
       ansible.builtin.file:
         path: "{{ docker_root }}"

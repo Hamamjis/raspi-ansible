@@ -1,0 +1,33 @@
+- name: Setup Homer
+  hosts: raspi
+
+  vars_files:
+    - ../../vars.yml
+
+  vars:
+    homer_dir: "{{ docker_root }}/homer"
+
+  tasks:
+    - name: Copy Homer directory
+      ansible.builtin.copy:
+        src: "./files/99_homer/"
+        dest: "{{ homer_dir }}"
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: "0755"
+
+    - name: Copy Homer .env config to homer_dir/.env
+      ansible.builtin.template:
+        src: 99_homer/.env.j2
+        dest: "{{ homer_dir }}/.env"
+        mode: "644"
+
+    - name: Copy Homer config.yml to homer_dir/config.yml
+      ansible.builtin.template:
+        src: 99_homer/config.yml.j2
+        dest: "{{ homer_dir }}/assets/config.yml"
+        mode: "644"
+
+    - name: Start Homer
+      community.docker.docker_compose_v2:
+        project_src: "{{ homer_dir }}"

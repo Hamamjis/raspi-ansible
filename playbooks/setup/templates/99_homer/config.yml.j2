@@ -1,0 +1,26 @@
+---
+title: "Raspberry Pi"
+logo: "assets/tools/raspberry-pi.png"
+
+columns: "auto" # "auto" or number (must be a factor of 12: 1, 2, 3, 4, 6, 12)
+connectivityCheck: true
+
+defaults:
+  layout: list # Either 'columns', or 'list'
+
+theme: default # 'default' or one of the themes available in 'src/assets/themes'.
+
+services:
+  - items:
+      - name: "Cockpit"
+        logo: "assets/tools/cockpit.svg"
+        url: "http://{{ ansible_host }}:9090/"
+      - name: "OpenSpeedTest"
+        logo: "assets/tools/openspeedtest.svg"
+        url: "http://{{ ansible_host }}:3000/"
+      - name: "Immich"
+        logo: "assets/tools/immich.svg"
+        url: "http://{{ ansible_host }}:2283/"
+      - name: "Pi-hole"
+        logo: "assets/tools/pi-hole.svg"
+        url: "http://{{ ansible_host }}/admin/"

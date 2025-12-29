@@ -1,0 +1,36 @@
+- name: Setup MotionEye
+  hosts: raspi
+
+  vars_files:
+    - ../../vars.yml
+
+  vars:
+    motioneye_dir: "{{ docker_root }}/motioneye"
+
+  tasks:
+    - name: Copy MotionEye directory
+      ansible.builtin.copy:
+        src: "./files/08_motioneye/"
+        dest: "{{ motioneye_dir }}"
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: "0755"
+
+    - name: Create MotionEye recording directory
+      become: true
+      ansible.builtin.file:
+        path: "{{ motioneye_recordings_root }}"
+        state: directory
+        owner: root
+        group: users
+        mode: "2775"
+
+    - name: Copy MotionEye .env config to motioneye_dir/.env
+      ansible.builtin.template:
+        src: 08_motioneye/.env.j2
+        dest: "{{ motioneye_dir }}/.env"
+        mode: "644"
+
+    - name: Start MotionEye
+      community.docker.docker_compose_v2:
+        project_src: "{{ motioneye_dir }}"

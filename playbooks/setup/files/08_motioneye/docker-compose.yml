@@ -1,0 +1,14 @@
+services:
+  motioneye:
+    # ToDo: Change from unstable dev/edge to stable GitHub registry release and Docker registry release, once available
+    image: ghcr.io/motioneye-project/motioneye:edge
+    ports:
+      - "8081:8081"
+      - "8765:8765"
+    volumes:
+      - ${MOTIONEYE_RECORDING_LOCATION}:/var/lib/motioneye
+      - etc_motioneye:/etc/motioneye
+      - /etc/localtime:/etc/localtime:ro
+
+volumes:
+  etc_motioneye:

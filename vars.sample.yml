@@ -3,6 +3,7 @@ system_timezone: Asia/Beirut
 data_root: /data
 docker_root: /home/{{ ansible_user }}/docker
 immich_data_root: "{{ data_root }}/immich"
+motioneye_recordings_root: "{{ data_root }}/MotionEye"
 
 pihole_admin_password: "0000"
 default_user_password: "0000"

@@ -6,4 +6,5 @@
 - ansible.builtin.import_playbook: 05_pihole.yml
 - ansible.builtin.import_playbook: 06_tailscale.yml
 - ansible.builtin.import_playbook: 07_immich.yml
+- ansible.builtin.import_playbook: 08_motioneye.yml
 - ansible.builtin.import_playbook: 99_homer.yml

@@ -12,6 +12,7 @@
           - apt-transport-https
           - ca-certificates
           - curl
+          - python3-debian
 
     - name: Add Docker Repository
       ansible.builtin.deb822_repository:

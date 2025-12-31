@@ -9,6 +9,6 @@ services:
       - ${MOTIONEYE_RECORDING_LOCATION}:/var/lib/motioneye
       - etc_motioneye:/etc/motioneye
       - /etc/localtime:/etc/localtime:ro
-
+    restart: always
 volumes:
   etc_motioneye:

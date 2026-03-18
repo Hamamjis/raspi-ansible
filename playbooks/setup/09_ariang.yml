@@ -1,0 +1,42 @@
+- name: Setup AriaNG
+  hosts: raspi
+
+  vars_files:
+    - ../../vars.yml
+
+  vars:
+    ariang_dir: "{{ docker_root }}/ariang"
+
+  tasks:
+    - name: Copy AriaNG directory
+      become: true
+      ansible.builtin.copy:
+        src: "./files/09_ariang/"
+        dest: "{{ ariang_dir }}"
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: "0755"
+
+    - name: Create AriaNG Downloads directory
+      become: true
+      ansible.builtin.file:
+        path: "{{ ariang_downloads_root }}"
+        state: directory
+        owner: root
+        group: users
+        mode: "2775"
+
+    - name: Retrieve users group details
+      ansible.builtin.getent:
+        database: group
+        key: users
+
+    - name: Copy AriaNG .env config to ariang_dir/.env
+      ansible.builtin.template:
+        src: 09_ariang/.env.j2
+        dest: "{{ ariang_dir }}/.env"
+        mode: "644"
+
+    - name: Start AriaNG
+      community.docker.docker_compose_v2:
+        project_src: "{{ ariang_dir }}"

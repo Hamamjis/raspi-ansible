@@ -1,0 +1,14 @@
+services:
+  ariang:
+    image: hurlenko/aria2-ariang
+    entrypoint: ["/bin/sh", "-c", "umask 000 && /aria2/start.sh --conf-path=/aria2/conf/aria2.conf"]
+    ports:
+      - 4455:8080
+    volumes:
+      - ${ARIANG_DOWNLOADS_ROOT}:/aria2/data
+    environment:
+      - PUID=0
+      - PGID=${USERS_GROUP_GID}
+      - RPC_SECRET=
+      - ARIA2RPCPORT=4455
+    restart: always

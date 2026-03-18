@@ -2,7 +2,7 @@
 title: "Raspberry Pi"
 logo: "assets/tools/raspberry-pi.png"
 
-columns: "auto" # "auto" or number (must be a factor of 12: 1, 2, 3, 4, 6, 12)
+columns: 3 # "auto" or number (must be a factor of 12: 1, 2, 3, 4, 6, 12)
 connectivityCheck: true
 
 defaults:
@@ -27,3 +27,6 @@ services:
       - name: "MotionEye"
         logo: "assets/tools/motioneye.svg"
         url: "http://{{ ansible_host }}:8765/"
+      - name: "AriaNG"
+        logo: "assets/tools/ariang.png"
+        url: "http://{{ ansible_host }}:4455/"

@@ -54,3 +54,21 @@
         owner: "{{ ansible_user }}"
         group: "{{ ansible_user }}"
         mode: "0755"
+
+    - name: Configure Docker daemon DNS
+      ansible.builtin.copy:
+        dest: /etc/docker/daemon.json
+        content: |
+          {
+            "dns": ["9.9.9.9", "149.112.112.112"]
+          }
+        owner: root
+        group: root
+        mode: "0644"
+      notify: Restart docker
+
+  handlers:
+    - name: Restart docker
+      ansible.builtin.service:
+        name: docker
+        state: restarted
